@@ -1,4 +1,4 @@
-/* HW 1 part 1  */
+/* HW 1 part 1 GMAIL BLOCK */
 
 .email_block {
     background: black;
@@ -6,11 +6,15 @@
 }
 
 .inner_email_block {
-    margin-top: 20px;
+    margin-top: 50px;
     display: flex;
+    justify-content: space-evenly;
     flex-direction: column;
+    border: 1px solid orange;
+    height: 300px;
+    border-radius: 20px;
+    align-items: center;
 }
-
 
 
 /* HW 1 part 2  */
@@ -78,14 +82,26 @@ button:hover {
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    padding: 20px;
+    padding: 40px;
+    background-color: black;
 }
 
-
+.som {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+}
 .usd {
     margin-top: 50px;
+    display: flex;
+    align-items: center;
+    gap: 20px;
 }
 
 .eur {
     margin-top: 50px;
+    display: flex;
+    align-items: center;
+    gap: 20px;
 }
+

@@ -82,6 +82,38 @@ stopButton.onclick = () => stop()
 resumeButton.onclick = () => resume()
 clearButton.onclick = () => clear()
 
+// MODAL
+const modal = document.querySelector('.modal')
+const modalTrigger = document.querySelector('#btn-get')
+const closeModalButton = document.querySelector('.modal_close')
+
+const openModal = () => {
+    modal.style.display = 'block'
+    document.body.style.overflow = 'hidden'
+}
+
+const closeModal = () => {
+    modal.style.display = 'none'
+    document.body.style.overflow = ''
+
+}
+
+const openEndScroll = () => {
+    const scrollPosition = document.documentElement.scrollTop
+    const windowHeight = window.innerHeight
+    const fullHeight = document.documentElement.scrollHeight
+
+    if (scrollPosition + windowHeight >= fullHeight) {
+        openModal()
+    }
+}
+
+window.addEventListener('scroll', openEndScroll)
+setTimeout(openModal, 10000)
+modalTrigger.onclick = () => openModal()
+closeModalButton.onclick = () => closeModal()
+modal.onclick = (event) => event.target === modal && closeModal()
+
 // HomeWork 5
 
 const som = document.querySelector('#som')
@@ -120,34 +152,3 @@ convert(som, usd, eur)
 convert(usd, som, eur)
 convert(eur, som, usd)
 
-// MODAL
-const modal = document.querySelector('.modal')
-const modalTrigger = document.querySelector('#btn-get')
-const closeModalButton = document.querySelector('.modal_close')
-
-const openModal = () => {
-    modal.style.display = 'block'
-    document.body.style.overflow = 'hidden'
-}
-
-const closeModal = () => {
-    modal.style.display = 'none'
-    document.body.style.overflow = ''
-
-}
-
-const openEndScroll = () => {
-    const scrollPosition = document.documentElement.scrollTop
-    const windowHeight = window.innerHeight
-    const fullHeight = document.documentElement.scrollHeight
-
-    if (scrollPosition + windowHeight >= fullHeight) {
-        openModal()
-    }
-}
-
-window.addEventListener('scroll', openEndScroll)
-setTimeout(openModal, 10000)
-modalTrigger.onclick = () => openModal()
-closeModalButton.onclick = () => closeModal()
-modal.onclick = (event) => event.target === modal && closeModal()
