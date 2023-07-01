@@ -1,3 +1,4 @@
+// HW 1 part 1
 const emailInput = document.querySelector('#emailInput')
 const emailCheck = document.querySelector('#emailCheck')
 const emailResult = document.querySelector('.emailResult')
@@ -18,7 +19,7 @@ emailCheck.onclick = () => {
 }
 
 
-// // HW 1 part 2
+// HW 1 part 2
 
 const childBlock = document.querySelector('.child_block')
 
@@ -116,39 +117,50 @@ modal.onclick = (event) => event.target === modal && closeModal()
 
 // HomeWork 5
 
-const som = document.querySelector('#som')
-const usd = document.querySelector('#usd')
-const eur = document.querySelector('#eur')
+const som = document.querySelector('#som');
+const usd = document.querySelector('#usd');
+const eur = document.querySelector('#eur');
 
-
-const convert = (element, targetElement, targetElement2) => {
-    element.oninput = () => {
-        const request = new XMLHttpRequest()
-        request.open("GET", "change.json")
-        request.setRequestHeader("Content-type", "application/json")
-        request.send()
-        request.onload = () => {
-            const response = JSON.parse(request.response)
-            if (element === som ) {
-                targetElement.value = (element.value / response.usd).toFixed(2)
-                targetElement2.value = (element.value / response.eur).toFixed(2)
-            } else if (element === usd) {
-                targetElement.value = (element.value * response.usd).toFixed(2)
-                targetElement2.value = (element.value * response.usdToEur).toFixed(2) 
-            } else if (element === eur) {
-                targetElement.value = (element.value * response.eur).toFixed(2)
-                targetElement2.value = (element.value * response.euroToUsd).toFixed(2)
-            }
-            
-            if (element.value === '') {
-                targetElement.value = ''
-                targetElement2.value = ''
-            }
-        }
+const fetchData = async (url) => {
+    try {
+        const response = await fetch(url);
+        const data = await response.json();
+        return data;
+    } catch (error) {
+        console.error('Ошибка при выполнении GET-запроса:', error);
+        return {};
     }
-}
+    };
 
-convert(som, usd, eur)
-convert(usd, som, eur)
-convert(eur, som, usd)
+    const convert = async (element, targetElement, targetElement2) => {
+    element.oninput = async () => {
+        try {
+        const response = await fetchData('change.json');
+        if (element === som) {
+            targetElement.value = (element.value / response.usd).toFixed(2);
+            targetElement2.value = (element.value / response.eur).toFixed(2);
+        } else if (element === usd) {
+            targetElement.value = (element.value * response.usd).toFixed(2);
+            targetElement2.value = (element.value * response.usdToEur).toFixed(2);
+        } else if (element === eur) {
+            targetElement.value = (element.value * response.eur).toFixed(2);
+            targetElement2.value = (element.value * response.euroToUsd).toFixed(2);
+        }
+
+        if (element.value === '') {
+            targetElement.value = '';
+            targetElement2.value = '';
+        }
+        } catch (error) {
+        console.error('Ошибка при получении данных:', error);
+        }
+    };
+};
+
+convert(som, usd, eur);
+convert(usd, som, eur);
+convert(eur, som, usd);
+
+
+
 
